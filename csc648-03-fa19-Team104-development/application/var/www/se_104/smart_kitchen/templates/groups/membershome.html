@@ -1,0 +1,425 @@
+<!DOCTYPE html> {% extends "site/base.html" %} {% block content %}
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <!-- This is a visual of the "home" group and its members with the ability to edit the list -->
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <!-- <h5 class="card-price text-center">Home<span class="period"></span></h5> -->
+                        <h1 class="my-4">
+                        <small>{{ fridge.name }}</small>
+                        </h1>
+                        <!-- <button type="button" class="btn btn-danger" style="float: right;">Leave Fridge</button> -->
+                        <form method="post" action="/leaveFridge/">
+                            {% csrf_token %}
+                            <button name="fridge" type="submit" class="btn btn-danger" value="{{ fridge.id }}">Leave This Fridge</button>
+                        </form>
+                        {% if fridges %}
+                        <form method="post" action="/removemember/">
+                            <div class="form-label-group">
+                                <hr>
+                                <ul class="fa-ul">
+                                    {% for f in fridges %}
+                                    <!--A member that can be removed from the fridge -->
+                                    <li>
+                                        <span class="fa-li"><i class="fas fa-check"></i></span> {{ f.user.username }} {% csrf_token %}
+                                        <button name="fridge" type="submit" class="btn btn-danger btn-sm" value="{{ f.id }}">Remove</button>
+                                    </li>
+
+                                    <br> {% endfor %}
+                                </ul>
+                            </div>
+                        </form>
+                        {% endif %}
+                        <!-- Underlined search bars with buttons -->
+                        <form method="post" action="/inviteMember/">
+                            <div class="row mb-4">
+                                <div class="form-group col-md-9">
+                                    {% csrf_token %}
+                                    <input name="email" type="email" placeholder="Email address of your friend" class="form-control form-control-underlined" value={{ form.email }}>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button name="code" type="submit" class="btn btn-success" value="{{ fridge.code }}">Invite</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End -->
+
+                        <!-- Confirm changes button that will save any changes made to the members in the list -->
+                        <!-- <a href="/group" class="btn btn-block btn-success text-uppercase">Confirm Changes</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+
+</html>
+
+<!-- Css code that gives the page a nicer design  -->
+<style type="text/css">
+    /* Change this breakpoint if you change the breakpoint of the navbar */
+    
+    @media (min-width: 992px) {
+        .animate {
+            animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-fill-mode: both;
+            -webkit-animation-fill-mode: both;
+        }
+    }
+    
+    @keyframes slideIn {
+        0% {
+            transform: translateY(1rem);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0rem);
+            opacity: 1;
+        }
+        0% {
+            transform: translateY(1rem);
+            opacity: 0;
+        }
+    }
+    
+    @-webkit-keyframes slideIn {
+        0% {
+            -webkit-transform: transform;
+            -webkit-opacity: 0;
+        }
+        100% {
+            -webkit-transform: translateY(0);
+            -webkit-opacity: 1;
+        }
+        0% {
+            -webkit-transform: translateY(1rem);
+            -webkit-opacity: 0;
+        }
+    }
+    
+    .slideIn {
+        -webkit-animation-name: slideIn;
+        animation-name: slideIn;
+    }
+    /* Background color of page */
+    
+    section.pricing {
+        background: #007bff;
+        background: linear-gradient(to right, #0062E6, #33AEFF);
+    }
+    
+    .pricing .card {
+        border: none;
+        border-radius: 1rem;
+        transition: all 0.2s;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .pricing hr {
+        margin: 1.5rem 0;
+    }
+    /*Sizing of card title */
+    
+    .pricing .card-title {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+        letter-spacing: .1rem;
+        font-weight: bold;
+    }
+    
+    .pricing .card-price {
+        font-size: 3rem;
+        margin: 0;
+    }
+    
+    .pricing .card-price .period {
+        font-size: 0.8rem;
+    }
+    
+    .pricing ul li {
+        margin-bottom: 1rem;
+    }
+    
+    .pricing .text-muted {
+        opacity: 0.7;
+    }
+    
+    .pricing .btn {
+        font-size: 80%;
+        border-radius: 5rem;
+        letter-spacing: .1rem;
+        font-weight: bold;
+        padding: 1rem;
+        opacity: 0.7;
+        transition: all 0.2s;
+    }
+    /* Hover Effects on Card */
+    
+    @media (min-width: 992px) {
+        .pricing .card:hover {
+            margin-top: -.25rem;
+            margin-bottom: .25rem;
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+        }
+        .pricing .card:hover .btn {
+            opacity: 1;
+        }
+    }
+    
+    :root {
+        --input-padding-x: 1.5rem;
+        --input-padding-y: .75rem;
+    }
+    /* Background color */
+    
+    body {
+        background: #007bff;
+        background: linear-gradient(to right, #0062E6, #33AEFF);
+    }
+    
+    .card-signin {
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-signin .card-title {
+        margin-bottom: 2rem;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+    
+    .card-signin .card-body {
+        padding: 2rem;
+    }
+    
+    .form-signin {
+        width: 100%;
+    }
+    
+    .form-signin .btn {
+        font-size: 80%;
+        border-radius: 5rem;
+        letter-spacing: .1rem;
+        font-weight: bold;
+        padding: 1rem;
+        transition: all 0.2s;
+    }
+    
+    .form-label-group {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .form-label-group input {
+        height: auto;
+        border-radius: 2rem;
+    }
+    
+    .form-label-group>input,
+    .form-label-group>label {
+        padding: var(--input-padding-y) var(--input-padding-x);
+    }
+    
+    .form-label-group>label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        /* Override default `<label>` margin */
+        line-height: 1.5;
+        color: #495057;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out;
+    }
+    
+    .form-label-group input::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    .form-label-group input:-ms-input-placeholder {
+        color: transparent;
+    }
+    
+    .form-label-group input::-ms-input-placeholder {
+        color: transparent;
+    }
+    
+    .form-label-group input::-moz-placeholder {
+        color: transparent;
+    }
+    
+    .form-label-group input::placeholder {
+        color: transparent;
+    }
+    
+    .form-label-group input:not(:placeholder-shown) {
+        padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+        padding-bottom: calc(var(--input-padding-y) / 3);
+    }
+    
+    .form-label-group input:not(:placeholder-shown)~label {
+        padding-top: calc(var(--input-padding-y) / 3);
+        padding-bottom: calc(var(--input-padding-y) / 3);
+        font-size: 12px;
+        color: #777;
+    }
+    /*Color of plus/mius buttons */
+    
+    .btn-google {
+        color: white;
+        background-color: #ea4335;
+    }
+    
+    .btn-facebook {
+        color: white;
+        background-color: #3b5998;
+    }
+    /* Fallback for Edge
+-------------------------------------------------- */
+    
+    @supports (-ms-ime-align: auto) {
+        .form-label-group>label {
+            display: none;
+        }
+        .form-label-group input::-ms-input-placeholder {
+            color: #777;
+        }
+    }
+    /* Fallback for IE
+-------------------------------------------------- */
+    
+    @media all and (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+        .form-label-group>label {
+            display: none;
+        }
+        .form-label-group input:-ms-input-placeholder {
+            color: #777;
+        }
+    }
+    
+    .number-input input[type="number"] {
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+    
+    .number-input input[type=number]::-webkit-inner-spin-button,
+    .number-input input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+    
+    .number-input {
+        margin-bottom: 3rem;
+    }
+    
+    .number-input button {
+        -webkit-appearance: none;
+        background-color: transparent;
+        border: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin: 0;
+        position: relative;
+    }
+    
+    .number-input button:before,
+    .number-input button:after {
+        display: inline-block;
+        position: absolute;
+        content: '';
+        height: 2px;
+        transform: translate(-50%, -50%);
+    }
+    
+    .number-input button.plus:after {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+    
+    .number-input input[type=number] {
+        text-align: center;
+    }
+    
+    .number-input.number-input {
+        border: 1px solid #ced4da;
+        width: 10rem;
+        border-radius: .25rem;
+    }
+    
+    .number-input.number-input button {
+        width: 2.6rem;
+        height: .7rem;
+    }
+    
+    .number-input.number-input button.minus {
+        padding-left: 10px;
+    }
+    
+    .number-input.number-input button:before,
+    .number-input.number-input button:after {
+        width: .7rem;
+        background-color: #495057;
+    }
+    
+    .number-input.number-input input[type=number] {
+        max-width: 4rem;
+        padding: .5rem;
+        border: 1px solid #ced4da;
+        border-width: 0 1px;
+        font-size: 1rem;
+        height: 2rem;
+        color: #495057;
+    }
+    
+    @media not all and (min-resolution:.001dpcm) {
+        @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+            .number-input.def-number-input.safari_only button:before, .number-input.def-number-input.safari_only button:after {
+                margin-top: -.3rem;
+            }
+        }
+    }
+    
+    .form-control:focus {
+        box-shadow: none;
+    }
+    
+    .form-control-underlined {
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-radius: 0;
+        padding-left: 0;
+    }
+    
+    .form-control::placeholder {
+        font-size: 0.95rem;
+        color: #aaa;
+        font-style: italic;
+    }
+    /* Sticky Footer Classes */
+    
+    html,
+    body {
+        height: 90%;
+    }
+    
+    #page-content {
+        flex: 1 0 auto;
+    }
+    
+    #sticky-footer {
+        flex-shrink: none;
+    }
+    /* Other Classes for Page Styling */
+</style>

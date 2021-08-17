@@ -1,0 +1,14 @@
+{% extends "site/base.html" %}
+{% block content %}
+        <h1 class="text-color-green">
+        Team Members
+        </h1>
+        <button type="button" class="btn button-color"> <a href="{% url 'khyo' %}" class="text-color-white"> Khyo </a> </button>
+        <button type="button" class="btn button-color"> <a href="{% url 'darnell' %}" class="text-color-white"> Darnell </a> </button>
+        <button type="button" class="btn button-color"> <a href="{% url 'srushti' %}" class="text-color-white"> Srushti </a> </button>
+        <button type="button" class="btn button-color"> <a href="{% url 'david' %}" class="text-color-white"> David </a> </button>
+        <button type="button" class="btn button-color"> <a href="{% url 'jonathan' %}" class="text-color-white"> Jonathan </a> </button>
+        <button type="button" class="btn button-color"> <a href="{% url 'brian' %}" class="text-color-white"> Brian </a> </button>
+		
+		<P><P> <button type="button" class="btn button-color"> <a href="{% url 'logSite' %}" class="text-color-white"> Meeting Logs </a> </button>
+{% endblock content %}

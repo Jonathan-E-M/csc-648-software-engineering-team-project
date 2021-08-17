@@ -1,0 +1,137 @@
+{% extends "site/base.html" %}
+{% block content %}
+
+  
+    <!--Masthead-->
+  <header class="text-center bg-color-lightgreen">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 mx-auto">
+          <h1 class="mt-5 mb-5 text-center text-color-green blockquote">With Ceres, we aim to make grocery
+                store visits easier, by providing users the ability to create a shareable shopping list, helpful recipes, and an
+                interface that shows their current items and expiration dates.</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+		{% if user.is_authenticated %}
+		
+		{% else %}
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-6 mb-2 mb-md-0">
+                <button type="button" onclick="location.href = '{% url 'signin' %}'  "class="btn btn-block btn-lg button-color">Sign in!</button>
+              </div>
+              <div class="col-12 col-md-6 mb-5">
+                <button type="button" onclick="location.href = '{% url 'signup' %}'  "class="btn btn-block btn-lg button-color">Sign up!</button>
+              </div>
+            </div>
+          </form>
+		 {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/img/showcase-1.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 class="text-color-green">Upload your receipts</h2>
+          <p class="lead mb-0 text-color-green"> You will have the option to manually add items or upload a picture of your receipt. Our application will then add
+                the items to you inventory. Once Ceres is done reading the receipts it will format it into a list that gives you information on quantity, name, and other fields.
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters bg-color-lightgreen">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('/static/img/showcase-2.jpg');"></div> 
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2 class="text-color-green">Multiple users sharing a fridge</h2>
+          <p class="lead mb-0 text-color-green">Ceres also allows users in a particular group to share a “household pantry”, which lists all the items in the
+              fridge and can be labeled to eliminate confusion between who owns what when multiple users share a
+              fridge or space. </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/img/showcase-3.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 class="text-color-green">Why choose Ceres?</h2>
+          <p class="lead mb-0 text-color-green">Ceres is an improvement of current applications in the market, while also setting itself apart as
+              a superior product. We have included and plan to include features that everyone currently loves and more
+              that will be loved; such as the ability to create a grocery list away from home, keeping track of the items
+              in your fridge, having the ability to share your lists with other people that are using the same refrigerator
+              space as a user, and preloaded recipes that are easy to follow. With features like reading receipts and
+              formatting it into a list that gives users information on quantity, name, among other fields that can be
+              added via user discretion. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials text-center bg-color-lightgreen text-color-green">
+    <div class="container">
+      <h2 class="mb-5">What people are saying...</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="/static/img/testimonials-1.jpg" alt="">
+            <h5>Margaret E.</h5>
+            <p class="font-weight-light mb-0">"Ceres is a life saver."</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="/static/img/testimonials-2.jpg" alt="">
+            <h5>Fred S.</h5>
+            <p class="font-weight-light mb-0">"I don't know what I would do with out Ceres"</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="/static/img/testimonials-3.jpg" alt="">
+            <h5>Sarah W.</h5>
+            <p class="font-weight-light mb-0">"Ceres allows me to cook food with my current inventory with their receipt creator."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  {% if user.is_authenticated %}
+  {% else %}
+  <section class="text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mt-4 mb-4 text-color-green">Ready to get started? Sign up now!</h2>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+                <div class="col-12 col-md-6 mb-2 mb-md-0">
+                    <button type="button" onclick="location.href = '{% url 'signin' %}'  "class="btn btn-block btn-lg button-color">Sign in!</button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button type="button" onclick="location.href = '{% url 'signup' %}'  "class="btn btn-block btn-lg button-color">Sign up!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock content %}
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

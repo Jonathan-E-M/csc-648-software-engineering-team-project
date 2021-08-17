@@ -1,0 +1,64 @@
+{% extends "site/base.html" %}
+{% block content %}
+{% load static %}
+  <section class="testimonials text-center bg-color-lightgreen">
+    <div class="container">
+      <h2 class="mb-5 text-color-green">About Us</h2>
+      <p class="lead mb-0 text-color-green">Our team consists of two graduate and four senior students of Computer Science department at SFSU.</p>
+      <br><br>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          	<!-- <a href="{% url 'khyo' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/khyo.jpg" %}"  alt=""></a> -->
+          	<img class="img-fluid rounded-circle mb-3" src="{% static "images/khyo.jpg" %}"">
+            <h5 style="color:#177013;">U Khyoi Nu</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Team Lead</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <!-- <a href="{% url 'srushti' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/srushti.jpg" %}"  alt=""></a> -->
+            <img class="img-fluid rounded-circle mb-3" src="{% static "images/srushti.jpg" %}"">
+            <h5 style="color:#177013;">Srushti Buddhadev</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Backend Lead</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+           <!-- <a href="{% url 'david' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/david.jpg" %}"  alt=""></a> -->
+           	<img class="img-fluid rounded-circle mb-3" src="{% static "images/david.jpg" %}"">
+            <h5 style="color:#177013;">David Fang</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Frontend Lead</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <!-- <a href="{% url 'brian' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/brian.jpg" %}"  alt=""></a> -->
+            <img class="img-fluid rounded-circle mb-3" src="{% static "images/brian.jpg" %}"">
+            <h5 style="color:#177013;">Brian Lopez</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Scrum Master</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <!-- <a href="{% url 'darnell' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/darnell.jpg" %}"  alt=""></a> -->
+            <img class="img-fluid rounded-circle mb-3" src="{% static "images/darnell.jpg" %}"">
+            <h5 style="color:#177013;">Darnell Kenebrew</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Git Master</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <!-- <a href="{% url 'jonathan' %}"><img class="img-fluid rounded-circle mb-3" src="{% static "images/jonathan.jpg" %}"  alt=""></a> -->
+            <img class="img-fluid rounded-circle mb-3" src="{% static "images/jonathan.jpg" %}"">
+            <h5 style="color:#177013;">Jonathan Munoz</h5>
+            <p class="font-weight-light mb-0" style="color:#177013;">Frontend Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

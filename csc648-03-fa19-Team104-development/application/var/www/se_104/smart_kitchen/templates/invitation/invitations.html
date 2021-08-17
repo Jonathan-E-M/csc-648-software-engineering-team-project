@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+{% extends "site/base.html" %}
+{% block content %}
+<!-- Page Content -->
+    <div class="container">
+
+      <!-- Displaying available invitations -->
+      
+      <h2 class="my-4">Pending Invitations:
+      <br><br>
+      {% if invitations %}
+      {% else %}
+        <small> No invitation to respond to </small>
+      </h2>
+      {% endif %} 
+      {% if invitations %}
+
+      {% for i in invitations %}
+      <!-- Displaying first available invitation -->
+      <div class="row">
+        <div class="col-md-5">
+          <!-- Group name of which invitation has been sent from -->
+          <h5>{{ i.fridge.name }}, {{ i.from_user.username }}</h5>
+          <!-- Two buttons that determine whether you want to accept or decline the group invitation -->
+          <form method="post" action="/invitations/">
+            {% csrf_token %}
+            <button name="accept" type="submit" class="btn btn-success" value="{{ i.id}}">Accept Invitation</button>
+            <button name="decline" type="submit" class="btn btn-danger" value="{{ i.id }}">Decline Invitation</button>
+          </form>
+        </div>
+      </div>
+
+      <hr>
+      {% endfor %}
+      {% endif %}  
+
+    </div>
+{% endblock content %}
+</html>
+
+<!-- Css code that gives the page a nicer design  -->
+<style type="text/css">
+  
+/* Change this breakpoint if you change the breakpoint of the navbar */
+
+@media (min-width: 992px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform:translateY(0rem);
+    opacity: 1;
+  }
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
+
+/* Sticky Footer Classes */
+
+html,
+body {
+  height: 90%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+</style>

@@ -1,0 +1,75 @@
+{% extends "site/base.html" %}
+{% block content %}
+{% if fridge %}
+<div class="container">
+	<div class="row">
+		<!-- This is a visual of the "My Group" grocery list and its contents with the ability to edit the list -->
+		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
+			<div class="card card-signin my-5">
+				<div class="card-body bg-color-lightgreen">
+					<h5 class="btn dropdown-toggle button-color" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ fridge.name }}<span class="period"></span></h5>
+			          {% if fridges %}
+			          <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+	    				{% for f in fridges %}
+			            	<form method="post" action="/grouplist/">
+				            	{% csrf_token %}
+				            	<button class="dropdown-item" name="code" type="submit" value="{{ f.id }}">{{ f.name }}</button>
+				          	</form>
+			            {% endfor %}
+			          </div>
+			          {% endif %}
+					<hr>
+
+					<!-- This is for text allignment with counter -->
+					{% if lists %}
+					{% for l in lists %}
+					<form method="post">
+					<div class="d-flex justify-content-between text-color-green">
+						<h5>
+							<li style="list-style: none">{{ l.food_name }}</li> 
+						</h5>
+						<h5>
+							X {{ l.quantity }}
+						</h5>
+					</div>
+					<!-- This is amount form with +/- option, with removing from list -->
+					<div class="container">
+						<div class="row">
+							{% csrf_token %}
+							<input type="hidden" name="code" value="{{ fridge.id }}">
+							<input class="quantity col" min="0" name="item_{{ l.id }}" value="{{ l.quantity }}" type="number">
+							<!-- <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button> -->
+							<!-- <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button> -->
+							<button name="list_item_id" formaction="/removeListItem/" type="submit" class="btn btn-danger" value="{{ l.id }}">Remove</button>
+						</div>
+					</div>
+
+					{% endfor %}
+					<p></p>
+				        <!-- Confirm changes button that will save any changes made to the grocery list -->
+				        <button type="submit" formaction="/editListItem/" class="btn btn-block button-color"> Confirm Changes </button>
+				    <p></p>
+			        </form>
+					{% endif %}
+					<!-- Underlined search bars with buttons -->
+			        <form method="post" action="/addListItem/">
+			        {% csrf_token %}
+			          <div class="row mb-4">
+			            <div class="form-group col-md-9">
+			              <!--Ability to search for an item and manually add it into the grocery list -->
+			              <input name="food_name" type="text" placeholder="Add a new item to list" class="form-control form-control-underlined" required
+			              value="{{ form.food_name }}">
+			            </div>
+			            <div class="form-group col-md-3">
+			              <button name="code" type="submit" class="btn button-color" value="{{ fridge.id }}">Add</button>
+			            </div>
+			          </div>
+			        </form>
+
+	        	</div>
+      		</div>
+    	</div>
+	</div>
+</div>
+{% endif %}
+{% endblock content %}

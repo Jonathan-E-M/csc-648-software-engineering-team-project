@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Ceres</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Custom fonts for this template -->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/landing-page.min.css" rel="stylesheet">
+    <link href="/static/css/general.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-color">
+        <a class="navbar-brand" href="{% url 'landing' %}">Ceres</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="nav navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'receipt' %}">UploadReceipt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'group' %}">Fridge</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mygrouplist' %}">ShoppingList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'invitations' %}">Invitation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recipe' %}">Recipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signout' %}">Log out</a>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
+                </li>
+                {% endif %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            </form>
+        </div>
+    </nav>
+
+    <div class="container"></div>
+    {% if messages %} {% for messages in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{ message }}
+    </div>
+    {% endfor%} {% else %}
+    <small class="text-muted text-center"> SFSU Software Engineering Project CSC 648-848, Fall 2019.  For Demonstration Only</small> {% endif %}
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<footer class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <p class="text-center text-color-green">Design by <a href="{% url 'about' %}" class="text-color-green">SFSU students</a></p>
+        </div>
+    </div>
+</footer>

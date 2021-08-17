@@ -1,0 +1,66 @@
+{% extends "site/base.html" %}
+{% block content %}
+<section class="pricing py-5">
+  <div class="container">
+	<h1 class="text-center text-color-green">Recipes</h1>
+	<!-- this will be the selection of fridge that for the user -->
+	<div class="dropdown text-center">
+		<!-- <button class="btn dropdown-toggle button-color" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Fridge </button>  -->
+    <h5 class="btn dropdown-toggle button-color" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ fridge.name }}<span class="period"></span></h5>
+    {% if fridges %}
+    <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+      {% for f in fridges %}
+        <form method="post" action="/recipeGroup/">
+          {% csrf_token %}
+          <button class="dropdown-item" name="code" type="submit" value="{{ f.id }}">{{ f.name }}</button>
+        </form>
+      {% endfor %}
+    </div>
+    {% endif %}
+<hr>
+	</div>
+	<br>
+    <div class="row">
+      <!-- This is a visual of the "Teriyaki Chicken" recipe and it's ingredients. Alongside other recipes. -->
+      {% if recipes %}
+      {% for r in recipes %}
+      <div class="col-lg-4">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center"></h5>
+            <h6 class="card-price text-center text-color-green">{{ r.0.name }}<span class="period"></span></h6>
+            <hr>
+            <ul class="fa-ul text-color-green">
+				<!-- the if statement can go here to check if the recipe has the items in the inventory -->
+              {% if r.1 %}
+                {% for i in r.1 %}
+                <li><span class="fa-li"><i class="fa fa-check" aria-hidden="true"></i></span>{{ i }}</li>
+                {% endfor %}
+              {% endif %}
+
+              {% if r.2 %}
+                {% for i in r.2 %}
+                <li><span class="fa-li"><i class="fa fa-times" aria-hidden="true"></i></span>{{ i }}</li>
+                {% if i not in lists %}
+                  <form method="post" action="/addListItemFromRecipe/">
+                  {% csrf_token %}
+                    <input type="hidden" name="food_name" value="{{ i }}">
+                    <button name="code" type="submit" class="btn btn-sm button-color" value="{{ fridge.id }}">Add to shopping list</button>
+                  </form>
+                {% endif %}
+                {% endfor %}
+              {% endif %}
+              <br>
+              <!-- Redirect you to the saved recipe link -->
+              <a href="{{ r.0.link }}" class="btn btn-block btn-info text-uppercase button-color">See full recipe</a> 
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <h3>Sorry, no recipe found for your current inventory.</h3>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock content %}
